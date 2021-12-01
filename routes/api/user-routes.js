@@ -5,7 +5,7 @@ const {
   createPizza,
   updatePizza,
   deletePizza
-} = require('../../controllers/pizza-controller');
+} = require('../../controllers/user-controller');
 
 // /api/pizzas
 router
