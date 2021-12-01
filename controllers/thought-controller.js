@@ -5,7 +5,7 @@ const thoughtController = {
   getAllThoughts(req, res) {
     Thought.find({})
       .populate({
-        path: 'responses',
+        path: 'reactions',
         select: '-__v'
       })
       .select('-__v')
@@ -21,7 +21,7 @@ const thoughtController = {
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
-        path: 'responses',
+        path: 'reactions',
         select: '-__v'
       })
       .select('-__v')
@@ -64,7 +64,7 @@ const thoughtController = {
         .catch(err => res.status(400).json(err));
     },
 
-  addResponse({params, body}, res) {
+  addReaction({params, body}, res) {
     Thought.findOneAndUpdate(
       {_id: params.thoughtId},
       {$push: {replies: body}},
@@ -101,10 +101,10 @@ const thoughtController = {
       .catch(err => res.json(err));
   },
 
-  removeResponse({params, body}, res) {
+  removeReaction({params, body}, res) {
     Thought.findOneAndUpdate(
       {_id: params.thoughtId},
-      {$pull: {replies: {responseId: params.responseId}}},
+      {$pull: {replies: {reactionId: params.reactionId}}},
       {new: true}
     ).then(dbUserData => res.json(dbUserData)).catch(err => res.json(err));
   }

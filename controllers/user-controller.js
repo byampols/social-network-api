@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 const userController = {
   // get all users
@@ -6,6 +6,10 @@ const userController = {
     User.find({})
       .populate({
         path: 'thoughts',
+        select: '-__v'
+      })
+      .populate({
+        path: 'friends',
         select: '-__v'
       })
       .select('-__v')
@@ -22,6 +26,10 @@ const userController = {
     User.findOne({ _id: params.id })
       .populate({
         path: 'thoughts',
+        select: '-__v'
+      })
+      .populate({
+        path: 'friends',
         select: '-__v'
       })
       .select('-__v')

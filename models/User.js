@@ -19,21 +19,10 @@ const UserSchema = new Schema({
     unique: true,
     validate: [validateEmail, 'Please use a valid email address.']   
   },
-  createdBy: {
-    type: String,
-    required: true,
-    trim: true
-  },
   createdAt: {
     type: Date,
     default: Date.now,
     get: (createdAtVal) => dateFormat(createdAtVal)
-  },
-  size: {
-    type: String,
-    required: true,
-    enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
-    default: 'Large'
   },
   thoughts: [
     {
